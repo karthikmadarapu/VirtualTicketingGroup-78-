@@ -10,6 +10,8 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<Category> Categories => Set<Category>();
     public DbSet<Purchase> Purchases => Set<Purchase>();
     public DbSet<PurchaseItem> PurchaseItems => Set<PurchaseItem>();
+    public bool CanConnect() => Database.CanConnect();
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
