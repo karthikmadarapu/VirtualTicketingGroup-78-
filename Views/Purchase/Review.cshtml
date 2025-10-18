@@ -1,0 +1,81 @@
+﻿@model IEnumerable<VirtualTicketing.Models.Event>
+@{
+    var quantities = ViewData["Quantities"] as List<int> ?? new List<int>();
+}
+
+<div class="container my-5">
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <h2 class="fw-bold text-primary text-center mb-4">Review Your Purchase</h2>
+
+            <form method="post" asp-action="Confirm">
+                <!-- Guest Info -->
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">Your Name</label>
+                        <input name="guestName" class="form-control shadow-sm" placeholder="Enter your full name" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">Email Address</label>
+                        <input name="guestEmail" class="form-control shadow-sm" placeholder="you@example.com" type="email" required />
+                    </div>
+                </div>
+
+                <!-- Selected Events -->
+                <h4 class="fw-semibold text-dark mt-3 mb-3">Selected Events</h4>
+                <div class="table-responsive">
+                    <table class="table table-striped align-middle text-center">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Event</th>
+                                <th>Price</th>
+                                <th>Qty</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.Count(); i++)
+                            {
+                                var e = Model.ElementAt(i);
+                                var qty = quantities != null && i < quantities.Count ? quantities[i] : 0;
+
+                                if (qty > 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            @e.Name
+                                            <input type="hidden" name="eventIds" value="@e.Id" />
+                                        </td>
+                                        <td>$@e.Price</td>
+                                        <td>
+                                            <input type="hidden" name="quantities" value="@qty" />
+                                            @qty
+                                        </td>
+                                        <td>$@(e.Price * qty)</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Total -->
+                <div class="text-end mt-3">
+                    <h5 class="fw-bold text-dark">
+                        Total: 
+                        <span class="text-success">
+                            $@(Model.Select((e, i) => e.Price * (quantities.Count > i ? quantities[i] : 0)).Sum())
+                        </span>
+                    </h5>
+                </div>
+
+                <!-- Confirm Button -->
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-success px-4 py-2 shadow-sm">
+                        Confirm Purchase
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

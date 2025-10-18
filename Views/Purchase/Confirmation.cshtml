@@ -1,0 +1,105 @@
+﻿@model VirtualTicketing.Models.Purchase
+
+@{
+    ViewData["Title"] = "Purchase Confirmation";
+}
+
+<div class="container my-5 fade-in">
+    <div class="card border-0 shadow-lg text-center py-5"
+         style="background-color: rgba(20, 20, 38, 0.85);
+                border-radius: 20px;
+                color: #ffffff;
+                box-shadow: 0 0 25px rgba(71, 142, 255, 0.3);">
+
+        <div class="card-body">
+
+            <!-- Check Icon -->
+            <div class="mb-4">
+                <span style="font-size: 3rem; color: #7fb8ff; text-shadow: 0 0 15px #478eff;">✔️</span>
+            </div>
+
+            <!-- Heading -->
+            <h2 class="fw-bold mb-3" style="color: #7fb8ff; text-shadow: 0 0 15px #478eff;">
+                Purchase Confirmed!
+            </h2>
+
+            <p class="mb-4" style="color: #e6e6e6; font-size: 1.1rem;">
+                Thank you, <strong style="color:#bcd7ff;">@Model.GuestName</strong>!  
+                Your order has been successfully placed.
+            </p>
+
+            <!-- Table -->
+            <div class="table-responsive mb-4">
+                <table class="table align-middle text-center mb-0"
+                       style="background-color: transparent; color: #fff; border-collapse: collapse;">
+                    <thead>
+                        <tr style="color: #bcd7ff; background-color: rgba(255,255,255,0.1);">
+                            <th style="border: none;">Event</th>
+                            <th style="border: none;">Price</th>
+                            <th style="border: none;">Qty</th>
+                            <th style="border: none;">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Items)
+                        {
+                            <tr>
+                                <td style="color:#fff;">@item.Event.Name</td>
+                                <td style="color:#bcd7ff;">
+                                    @item.Price.ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("en-CA"))
+                                </td>
+                                <td style="color:#bcd7ff;">@item.Quantity</td>
+                                <td style="color:#7fb8ff;">
+                                    @((item.Price * item.Quantity).ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("en-CA")))
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Total -->
+            <h4 class="fw-bold mb-3"
+                style="color:#7fb8ff; text-shadow: 0 0 10px #478eff; letter-spacing: 1px;">
+                Total Paid:
+                <span style="color:#bcd7ff;">
+                    @Model.TotalCost.ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("en-CA"))
+                </span>
+
+            </h4>
+
+            <!-- Purchase Date (Local Time) -->
+            <p class="mt-2 mb-4" style="color:#bcd7ff; font-size: 1rem;">
+                Purchase Date:
+                <span style="color:#7fb8ff;">
+                    @Model.PurchaseDate.ToLocalTime().ToString("f")
+                </span>
+            </p>
+
+            <!-- Back Home Button -->
+            <a asp-controller="Home" asp-action="Index"
+               class="btn fw-semibold mt-3 px-4 py-2"
+               style="background: linear-gradient(90deg, #478eff, #7fb8ff);
+                      color: #0d0d1a;
+                      border: none;
+                      border-radius: 12px;
+                      box-shadow: 0 0 15px rgba(71,142,255,0.7);
+                      transition: all 0.3s ease;">
+                Back to Home
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Confetti Animation -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+    window.onload = () => {
+        confetti({
+            particleCount: 200,
+            spread: 120,
+            origin: { y: 0.7 }
+        });
+    };
+</script>

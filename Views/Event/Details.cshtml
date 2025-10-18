@@ -1,0 +1,52 @@
+﻿@model VirtualTicketing.Models.Event
+
+@{
+    ViewData["Title"] = "Event Details";
+}
+
+<h1 class="text-center mt-4 mb-4">Event Details</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <!-- ✅ Add this card wrapper here -->
+        <div class="card p-4 shadow-sm">
+            <dl class="row">
+                <dt class="col-sm-3 fw-bold">Name</dt>
+                <dd class="col-sm-9">@Model.Name</dd>
+
+                <dt class="col-sm-3 fw-bold">Location</dt>
+                <dd class="col-sm-9">@Model.Location</dd>
+
+                <dt class="col-sm-3 fw-bold">Date</dt>
+                <dd class="col-sm-9">@Model.Date.ToString("dd-MM-yyyy")</dd>
+
+                <dt class="col-sm-3 fw-bold">Category</dt>
+                <dd class="col-sm-9">@Model.Category?.Name</dd>
+
+                @if (!string.IsNullOrEmpty(Model.Description))
+                {
+                    <dt class="col-sm-3 fw-bold">Description</dt>
+                    <dd class="col-sm-9">@Model.Description</dd>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.Organizer))
+                {
+                    <dt class="col-sm-3 fw-bold">Organizer</dt>
+                    <dd class="col-sm-9 text-primary">@Model.Organizer</dd>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.TeamInfo))
+                {
+                    <dt class="col-sm-3 fw-bold">Team Info</dt>
+                    <dd class="col-sm-9">@Model.TeamInfo</dd>
+                }
+            </dl>
+        </div>
+        <!-- ✅ Card ends here -->
+
+        <div class="mt-4">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning me-2">Edit</a>
+            <a asp-action="Index" class="btn btn-secondary">Back</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<VirtualTicketing.Models.Event>
+
+<div class="container my-4">
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <h2 class="fw-bold text-primary text-center mb-4">
+                Select Events to Purchase
+            </h2>
+
+            <form method="post" asp-action="Review">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr class="text-center">
+                                <th>Event</th>
+                                <th>Price</th>
+                                <th>Available</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.Count(); i++)
+                            {
+                                var e = Model.ElementAt(i);
+                                <tr class="text-center">
+                                    <td class="fw-semibold">
+                                        @e.Name
+                                        <input type="hidden" name="eventIds" value="@e.Id" />
+                                    </td>
+                                    <td>$@e.Price</td>
+                                    <td>
+                                        @if (e.AvailableTickets < 10)
+                                        {
+                                            <span class="text-danger fw-bold">@e.AvailableTickets</span>
+                                            <span class="badge bg-danger ms-1">Low</span>
+                                        }
+                                        else
+                                        {
+                                            <span>@e.AvailableTickets</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <input type="number"
+                                               name="quantities"
+                                               min="0"
+                                               max="@e.AvailableTickets"
+                                               value="0"
+                                               class="form-control text-center mx-auto w-50 shadow-sm"
+                                               style="border-radius: 6px;" />
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary px-4 py-2 shadow-sm">
+                        Review Purchase
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

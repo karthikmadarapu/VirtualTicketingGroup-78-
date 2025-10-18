@@ -1,0 +1,450 @@
+/* ------------------------------
+   GLOBAL THEME – NEON FUTURE (SOFT)
+------------------------------ */
+html {
+    font-size: 14px;
+}
+@media (min-width: 768px) {
+    html { font-size: 16px; }
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #e6e6e6;
+    background: radial-gradient(circle at top left, #141426, #0d0d1a 80%);
+    overflow-x: hidden;
+}
+
+/* Smooth page fade-in */
+.fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ------------------------------
+   LINKS
+------------------------------ */
+a {
+    color: #7fb8ff;
+    text-decoration: none;
+    transition: color 0.25s ease-in-out;
+}
+a:hover {
+    color: #bcd7ff;
+    text-shadow: 0 0 6px #478eff;
+}
+
+/* ------------------------------
+   HEADINGS
+------------------------------ */
+h1, h2, h3, h4, h5 {
+    color: #b9d2ff;
+    text-shadow: 0 0 4px #4c8dff, 0 0 10px rgba(76,141,255,0.4);
+    font-weight: 600;
+}
+.text-muted { color: #c4c4c4 !important; }
+
+/* ------------------------------
+   NAVBAR & FOOTER (DARKER THEME)
+------------------------------ */
+.navbar {
+    background: linear-gradient(90deg, rgba(10,10,25,0.95), rgba(20,20,40,0.95));
+    backdrop-filter: blur(10px);
+    border: none;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.6);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.navbar a.nav-link {
+    color: #c7c7d6 !important;
+    transition: all 0.3s ease;
+}
+
+.navbar a.nav-link:hover {
+    color: #8cc4ff !important;
+    text-shadow: 0 0 6px #4c8dff;
+}
+
+.navbar-brand {
+    color: #7aa8ff !important;
+    text-shadow: 0 0 8px rgba(79,172,254,0.6);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+/* ------------------------------
+   FOOTER (FINAL COLOR FIX)
+------------------------------ */
+footer {
+    background: linear-gradient(180deg, rgba(15,15,30,0.98), rgba(10,10,25,0.95));
+    color: #b8b8b8;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    text-align: center;
+    padding: 15px 0;
+    font-size: 0.9rem;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.4);
+}
+
+/* Regular footer links (developer names, privacy) */
+footer a {
+    color: #6ea8ff;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    text-decoration: none;
+}
+
+/* Hover glow */
+footer a:hover {
+    color: #9ac7ff;
+    text-shadow: 0 0 8px #478eff;
+}
+
+/* ✅ Final Fix: make “VirtualTicketing” same color as © 2025 */
+footer a[href="/"],
+footer a[href="/Home/Index"],
+footer a[href*="VirtualTicketing"],
+footer a.navbar-brand {
+    color: #b8b8b8 !important;
+    font-weight: 600 !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+    filter: brightness(1.1) !important;
+}
+
+
+
+
+/* ------------------------------
+   BRAND TITLE
+------------------------------ */
+.neon-title {
+    color: #76a9ff !important;
+    text-shadow: 0 0 6px #5b8cff, 0 0 10px rgba(91,140,255,0.5);
+    transition: all 0.3s ease;
+}
+.neon-title:hover {
+    text-shadow: 0 0 10px #9dc3ff, 0 0 20px rgba(128,176,255,0.7);
+    transform: scale(1.02);
+}
+
+/* ------------------------------
+   MAGIC BUTTON (PRIMARY CTA)
+------------------------------ */
+.btn-magic {
+    position: relative;
+    display: inline-block;
+    padding: 10px 26px;
+    border: none;
+    color: #fff;
+    background: linear-gradient(90deg, #5479e9, #9965f4);
+    border-radius: 50px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 0 12px rgba(132,94,247,0.55), 0 0 20px rgba(132,94,247,0.35);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    cursor: pointer;
+}
+.btn-magic:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 0 22px rgba(132,94,247,0.8), 0 0 45px rgba(132,94,247,0.7);
+}
+.btn-magic::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
+    transition: all 0.5s;
+}
+.btn-magic:hover::after { left: 125%; }
+
+/* ------------------------------
+   BOOTSTRAP BUTTON RE-THEME
+------------------------------ */
+.btn-primary, .btn-success, .btn-warning, .btn-danger, .btn-info {
+    border-radius: 8px;
+    transition: all 0.25s ease;
+    color: #fff;
+    border: none;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, #4facfe, #00f2fe);
+    box-shadow: 0 0 8px rgba(79,172,254,0.5);
+}
+.btn-primary:hover {
+    box-shadow: 0 0 18px rgba(79,172,254,0.8);
+    transform: translateY(-2px);
+}
+
+.btn-warning {
+    background: linear-gradient(90deg, #f6d365, #fda085);
+    box-shadow: 0 0 10px rgba(249,212,35,0.35);
+}
+.btn-danger {
+    background: linear-gradient(90deg, #ff5858, #f857a6);
+    box-shadow: 0 0 10px rgba(255,88,88,0.4);
+}
+.btn-info {
+    background: linear-gradient(90deg, #2193b0, #6dd5ed);
+    box-shadow: 0 0 10px rgba(109,213,237,0.4);
+}
+.btn-success {
+    background: linear-gradient(90deg, #43e97b, #38f9d7);
+    box-shadow: 0 0 10px rgba(67,233,123,0.45);
+}
+.btn-success:hover, .btn-danger:hover, .btn-warning:hover, .btn-info:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(255,255,255,0.2);
+}
+
+/* ------------------------------
+   TABLES & CARDS
+------------------------------ */
+.card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    box-shadow: 0 0 16px rgba(72,61,139,0.3);
+    backdrop-filter: blur(6px);
+    color: #fff;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(132,94,247,0.45);
+}
+.table {
+    color: #e6e6e6;
+}
+.table thead {
+    background-color: rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+/* unified row color + soft hover */
+.table-striped tbody tr:nth-of-type(odd),
+.table-striped tbody tr:nth-of-type(even) {
+    background-color: rgba(255,255,255,0.04);
+}
+.table-hover tbody tr:hover {
+    background-color: rgba(255,255,255,0.1);
+    transition: background-color 0.25s ease;
+}
+.table td, .table th {
+    border-color: rgba(255,255,255,0.1);
+}
+
+/* subtle hover for purchase page */
+.table td:hover, .table th:hover {
+    background-color: rgba(255,255,255,0.08);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* ------------------------------
+   INPUTS & FORMS
+------------------------------ */
+.form-control, .form-select {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+}
+.form-control:focus, .form-select:focus {
+    box-shadow: 0 0 8px #8e54e9;
+    border-color: #8e54e9;
+}
+
+/* ------------------------------
+   GLOWING BACKGROUND ANIMATION
+------------------------------ */
+.neon-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle at 25% 25%, rgba(66,135,245,0.25), transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(164,66,245,0.25), transparent 50%);
+    animation: glowMove 18s infinite alternate;
+}
+@keyframes glowMove {
+    from { background-position: 0% 50%; }
+    to { background-position: 100% 50%; }
+}
+
+/* ------------------------------
+   UTILITY STYLES
+------------------------------ */
+.shadow-sm { box-shadow: 0 2px 6px rgba(0,0,0,0.25) !important; }
+.rounded-pill { border-radius: 50px !important; }
+
+
+/* ✅ Fix: make “VirtualTicketing” same color as © 2025 */
+footer strong.text-dark {
+    color: #b8b8b8 !important;
+    font-weight: 600 !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+}
+
+
+
+/* ------------------------------
+   TABLE HEADER COLOR TUNING
+------------------------------ */
+
+/* Darker table header background */
+.table thead {
+    background: linear-gradient(90deg, rgba(40,40,60,0.95), rgba(25,25,40,0.95));
+    color: #e0e0e0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Table body rows slightly lighter for contrast */
+.table tbody tr {
+    background-color: rgba(30, 30, 45, 0.6);
+    transition: background-color 0.3s ease;
+}
+
+/* Hover glow effect on row */
+.table-hover tbody tr:hover {
+    background-color: rgba(60, 60, 90, 0.7);
+}
+
+/* Table borders softer */
+.table td, .table th {
+    border-color: rgba(255,255,255,0.07);
+}
+/* ------------------------------
+   TABLE HEADER (NEON SOFT MODE)
+------------------------------ */
+.table thead {
+    background-color: rgba(25, 25, 40, 0.85) !important; /* dark muted background */
+    color: #d0d0d0 !important; /* softer gray text */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Table rows – keep darker tone but consistent */
+.table tbody tr {
+    background-color: rgba(20, 20, 35, 0.7);
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect on rows */
+.table-hover tbody tr:hover {
+    background-color: rgba(45, 45, 70, 0.8);
+}
+
+/* Column borders subtle */
+.table td, .table th {
+    border-color: rgba(255,255,255,0.06);
+}
+
+/* ------------------------------
+   EVENTS TABLE – NEON ZEBRA STRIPING FIX
+------------------------------ */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.04) !important; /* soft dark gray-blue */
+    color: #ffffff !important; /* bright readable text */
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+    background-color: rgba(71, 142, 255, 0.07) !important; /* subtle neon blue tint */
+    color: #ffffff !important;
+}
+
+/* Hover highlight */
+.table-striped tbody tr:hover {
+    background-color: rgba(127, 184, 255, 0.15) !important;
+    transition: background-color 0.3s ease;
+}
+
+/* Optional: make table text slightly glow */
+.table-striped tbody tr td {
+    color: #ffffff !important;
+    text-shadow: 0 0 4px rgba(127,184,255,0.25);
+}
+
+/* ------------------------------
+   REMOVE STRONG GLOW FROM SPECIFIC HEADINGS
+------------------------------ */
+
+/* 1️⃣ Review Your Purchase */
+h2,
+h2.text-center,
+h2.purchase-title {
+    color: #bcd7ff !important;
+    text-shadow: none !important;
+    filter: none !important;
+}
+
+/* 2️⃣ Selected Events */
+h4,
+h4.section-title {
+    color: #bcd7ff !important;
+    text-shadow: none !important;
+    filter: none !important;
+}
+
+/* 3️⃣ Total (bottom right) */
+h5,
+.purchase-total,
+.total-text,
+.text-end {
+    color: #7fb8ff !important;
+    text-shadow: none !important;
+    filter: none !important;
+}
+
+
+/* ------------------------------
+   🔧 FINAL FIX – Text Visibility for "Selected Events" & "Total"
+------------------------------ */
+
+/* Selected Events (heading) */
+h4, h4.section-title, h4.text-muted {
+    color: #f1f1f1 !important;       /* bright white */
+    text-shadow: none !important;
+    opacity: 1 !important;
+    filter: brightness(1.2) !important;
+    font-weight: 600 !important;
+}
+
+/* Total text */
+.purchase-total,
+.total-text,
+.text-end,
+.text-end h5,
+.text-end span {
+    color: #8cc9ff !important;       /* soft neon blue, visible */
+    text-shadow: none !important;
+    opacity: 1 !important;
+    filter: brightness(1.3) !important;
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+}
+
+/* Make sure nothing dims inside the card */
+.card h4,
+.card h5,
+.card .text-end {
+    color: #e6e6e6 !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+}
+
+
+
+
+
+
+

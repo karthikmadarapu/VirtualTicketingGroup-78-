@@ -1,0 +1,84 @@
+﻿@model IEnumerable<VirtualTicketing.Models.Event>
+
+@{
+    ViewData["Title"] = "Events";
+}
+
+<h1 class="mb-3">Events</h1>
+
+<p>
+    <a class="btn btn-magic" asp-action="Create">Create New Event</a>
+
+</p>
+<form method="get" class="row g-2 mb-4">
+    <div class="col-md-3">
+        <input type="text" name="searchString" class="form-control" placeholder="Search By Name..." />
+    </div>
+    <div class="col-md-3">
+        <select name="categoryId" asp-items="@(new SelectList(ViewData["Categories"] as IEnumerable<Category>, "Id", "Name"))" class="form-select">
+            <option value="">All Categories</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <input type="date" name="date" class="form-control" />
+    </div>
+    <div class="col-md-3">
+        <select name="sortOrder" class="form-select">
+            <option value="">Sort by Name (A-Z)</option>
+            <option value="title_desc">Name (Z-A)</option>
+            <option value="date">Date (Oldest)</option>
+            <option value="date_desc">Date (Newest)</option>
+        </select>
+    </div>
+    <div class="col-md-1">
+        <button type="submit" class="btn btn-primary w-100">Go</button>
+    </div>
+</form>
+
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var e in Model)
+    {
+        <tr>
+            <td>@e.Name</td>
+            <td>@e.Location</td>
+            <td>@e.Date.ToShortDateString()</td>
+            <td>
+                @if (e.Category?.Name == "Concerts")
+                {
+                    <span class="badge bg-primary">@e.Category?.Name</span>
+                }
+                else if (e.Category?.Name == "Sports")
+                {
+                    <span class="badge bg-success">@e.Category?.Name</span>
+                }
+                else if (e.Category?.Name == "Theatre")
+                {
+                    <span class="badge bg-warning text-dark">@e.Category?.Name</span>
+                }
+                else
+                {
+                    <span class="badge bg-secondary">@e.Category?.Name</span>
+                }
+            </td>
+
+
+            <td>
+                <a asp-action="Details" asp-route-id="@e.Id" class="btn btn-info btn-sm">Details</a>
+                <a asp-action="Edit" asp-route-id="@e.Id" class="btn btn-warning btn-sm">Edit</a>
+                <a asp-action="Delete" asp-route-id="@e.Id" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
