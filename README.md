@@ -33,3 +33,13 @@ It allows users to browse events, purchase tickets, and confirm orders through a
    "ConnectionStrings": {
        "DefaultConnection": "Host=localhost;Database=VirtualTicketingDB;Username=postgres;Password=yourpassword"
    }
+
+---
+---
+
+## 🔒 Private GitHub Repository
+This project is hosted in a **private GitHub repository** for academic submission under COMP 2139 – Web Application Development (.NET).
+
+🔗 **Repository URL:** [https://github.com/karthikmadarapu/VirtualTicketingGroup-78-](https://github.com/karthikmadarapu/VirtualTicketingGroup-78-)  
+👨‍🏫 **Access Granted To:** Professor Sergio Santilli  
+📧 **Email:** Sergio.Santilli@georgebrown.ca
