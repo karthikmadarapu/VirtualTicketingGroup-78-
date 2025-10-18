@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using VirtualTicketing.Data;
 using VirtualTicketing.Models;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace VirtualTicketing.Controllers
 {
@@ -52,6 +53,7 @@ namespace VirtualTicketing.Controllers
             {
                 _context.Add(category);
                 await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "✅ Category created successfully!";
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -84,6 +86,7 @@ namespace VirtualTicketing.Controllers
                 {
                     _context.Update(category);
                     await _context.SaveChangesAsync();
+                    TempData["SuccessMessage"] = "✅ Category updated successfully!";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -117,10 +120,21 @@ namespace VirtualTicketing.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var category = await _context.Categories.FindAsync(id);
-            if (category != null)
-                _context.Categories.Remove(category);
 
+            if (category == null)
+                return NotFound();
+
+            // ✅ Prevent deletion if any Events exist with this CategoryId
+            bool hasEvents = await _context.Events.AnyAsync(e => e.CategoryId == id);
+            if (hasEvents)
+            {
+                TempData["ErrorMessage"] = "❌ Cannot delete category because it has associated events.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
+            TempData["SuccessMessage"] = "✅ Category deleted successfully!";
             return RedirectToAction(nameof(Index));
         }
     }
