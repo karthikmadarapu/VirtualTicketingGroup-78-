@@ -1,0 +1,70 @@
+﻿@model IEnumerable<VirtualTicketing.Models.Purchase>
+
+<div class="container my-5">
+
+    <h2 class="fw-bold text-primary mb-4 text-center">Purchase History</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="text-center mt-5">
+            <h4 class="text-light">No purchases found.</h4>
+            <p class="text-secondary">Start by selecting events and buying a ticket!</p>
+
+            <a asp-action="Select" class="btn btn-primary px-4 py-2 mt-3 shadow">
+                Start Purchase
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-dark table-hover align-middle shadow-lg">
+                <thead>
+                    <tr class="text-center">
+                        <th>Purchase ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Total Paid</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var p in Model)
+                    {
+                        <tr class="text-center">
+                            <td class="fw-semibold">@p.Id</td>
+                            <td>@p.GuestName</td>
+                            <td>@p.GuestEmail</td>
+                            <td class="text-success fw-bold">
+                                @p.TotalCost.ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("en-CA"))
+                            </td>
+                            <td>
+                                @p.PurchaseDate.ToLocalTime().ToString("g")
+                            </td>
+
+                            <td>
+                                <a asp-action="Details" asp-route-id="@p.Id"
+                                   class="btn btn-info btn-sm px-3 mx-1 shadow-sm">
+                                    Details
+                                </a>
+
+                                <a asp-action="Delete" asp-route-id="@p.Id"
+                                   class="btn btn-danger btn-sm px-3 mx-1 shadow-sm">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center mt-4">
+            <a asp-action="Select" class="btn btn-primary px-4 py-2 shadow">
+                Start New Purchase
+            </a>
+        </div>
+    }
+</div>

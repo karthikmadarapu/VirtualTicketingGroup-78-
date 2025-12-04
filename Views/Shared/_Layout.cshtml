@@ -5,89 +5,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - VirtualTicketing</title>
 
-    <!-- ✅ STYLES -->
+    <!-- BOOTSTRAP + ICONS -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/VirtualTicketing.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
-    <!-- ✅ GOOGLE FONT -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- SITE STYLES -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/VirtualTicketing.styles.css" asp-append-version="true" />
+
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-<div class="neon-bg"></div>
+    <div class="neon-bg"></div>
 
+    <!-- NAVBAR -->
+    <header class="shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+            <div class="container">
 
+                <!-- LOGO -->
+                <a class="navbar-brand fw-bold fs-4 text-primary d-flex align-items-center gap-2"
+                   asp-controller="Home" asp-action="Index">
+                    <i class="bi bi-ticket-perforated-fill"></i> VirtualTicketing
+                </a>
 
-<!-- ✅ NAVBAR -->
-<header class="shadow-sm">
-    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
-        <div class="container">
-            <a class="navbar-brand fw-bold fs-4 text-primary d-flex align-items-center gap-2"
-               asp-area="" asp-controller="Home" asp-action="Index">
-                <i class="bi bi-ticket-perforated-fill"></i> VirtualTicketing
-            </a>
+                <!-- MOBILE MENU -->
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <!-- NAV LINKS -->
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav align-items-center">
 
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-center">
-                    <li class="nav-item mx-1">
-                        <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active fw-semibold text-primary" : "text-dark")"
-                           asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item mx-1">
-                        <a class="nav-link text-dark" asp-controller="Category" asp-action="Index">Categories</a>
-                    </li>
-                    <li class="nav-item mx-1">
-                        <a class="nav-link text-dark" asp-controller="Event" asp-action="Index">Events</a>
-                    </li>
-                    <li class="nav-item mx-1">
-                        <a class="nav-link text-dark" asp-controller="Purchase" asp-action="Select">Purchase</a>
-                    </li>
-                    <li class="nav-item mx-1">
-                        <a class="nav-link text-dark" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li>
-                </ul>
+                        <!-- Home -->
+                        <li class="nav-item mx-1">
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active fw-semibold text-primary" : "text-dark")"
+                               asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+
+                        <!-- Categories -->
+                        <li class="nav-item mx-1">
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Categories" ? "active fw-semibold text-primary" : "text-dark")"
+                               asp-controller="Categories" asp-action="Index">Categories</a>
+                        </li>
+
+                        <!-- Events -->
+                        <li class="nav-item mx-1">
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Events" ? "active fw-semibold text-primary" : "text-dark")"
+                               asp-controller="Events" asp-action="Index">Events</a>
+                        </li>
+
+                        <!-- Purchase Tickets -->
+                        <li class="nav-item mx-1">
+                            <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Select" ? "active fw-semibold text-primary" : "text-dark")"
+                               asp-controller="Purchases" asp-action="Select">Purchase Tickets</a>
+                        </li>
+
+                        <!-- Purchase History -->
+                        <li class="nav-item mx-1">
+                            <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Index" && ViewContext.RouteData.Values["controller"]?.ToString() == "Purchases" ? "active fw-semibold text-primary" : "text-dark")"
+                               asp-controller="Purchases" asp-action="Index">Purchase History</a>
+                        </li>
+
+                        <!-- Privacy -->
+                        <li class="nav-item mx-1">
+                            <a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Privacy" ? "active fw-semibold text-primary" : "text-dark")"
+                               asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
             </div>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
 
-<!-- ✅ MAIN CONTENT -->
-<div class="container flex-grow-1 py-4 fade-in">
-    @if (TempData["SuccessMessage"] != null)
-    {
-        <div class="alert alert-success text-center shadow-sm fw-semibold">
-            @TempData["SuccessMessage"]
-        </div>
-    }
+    <!-- MAIN CONTENT -->
+    <div class="container flex-grow-1 py-4 fade-in">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success text-center shadow-sm fw-semibold">
+                @TempData["SuccessMessage"]
+            </div>
+        }
 
-    <main role="main" class="pb-5">
-        @RenderBody()
-    </main>
-</div>
-
-<!-- ✅ FOOTER -->
-<footer class="border-top bg-white text-muted py-3 mt-auto shadow-sm">
-    <div class="container text-center small">
-        © 2025 - <strong class="text-dark">VirtualTicketing</strong> |
-        Developed by
-        <span class="fw-semibold text-primary">Karthik Madarapu</span> &
-        <span class="fw-semibold text-success">Anthony Huete Jacobs</span> |
-        <a asp-controller="Home" asp-action="Privacy" class="text-decoration-none text-secondary ms-1">Privacy</a>
+        <main role="main" class="pb-5">
+            @RenderBody()
+        </main>
     </div>
-</footer>
 
-<!-- ✅ SCRIPTS -->
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-@await RenderSectionAsync("Scripts", required: false)
+    <!-- FOOTER -->
+    <footer class="border-top bg-white text-muted py-3 mt-auto shadow-sm">
+        <div class="container text-center small">
+            © 2025 - <strong class="text-dark">VirtualTicketing</strong> |
+            Built by 
+            <span class="fw-semibold text-primary">Karthik Madarapu</span> & 
+            <span class="fw-semibold text-success">Anthony Huete Jacobs</span> |
+            <a asp-controller="Home" asp-action="Privacy" class="text-decoration-none text-secondary ms-1">Privacy</a>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 
 </html>

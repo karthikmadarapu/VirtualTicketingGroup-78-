@@ -1,10 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using VirtualTicketing.Models;
 using System;
 
 namespace VirtualTicketing.Data
 {
-    public class ApplicationDbContext : DbContext
+    // NOTE: Changed base class from DbContext → IdentityDbContext<ApplicationUser, IdentityRole, string>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -20,23 +23,24 @@ namespace VirtualTicketing.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // IMPORTANT: call base so Identity tables are configured
             base.OnModelCreating(modelBuilder);
 
-            // ✅ Relationships
+            // Relationships
             modelBuilder.Entity<Event>()
                 .HasOne(e => e.Category)
                 .WithMany(c => c.Events)
                 .HasForeignKey(e => e.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // ✅ SEED DATA for Categories
+            // Seed data for Categories
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Concerts" },
                 new Category { Id = 2, Name = "Sports" },
                 new Category { Id = 3, Name = "Theatre" }
             );
 
-            // ✅ SEED DATA for Events (with UTC DateTime)
+            // Seed data for Events
             modelBuilder.Entity<Event>().HasData(
                 new Event
                 {

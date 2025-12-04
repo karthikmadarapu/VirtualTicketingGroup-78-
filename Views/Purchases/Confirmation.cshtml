@@ -1,7 +1,7 @@
 ﻿@model VirtualTicketing.Models.Purchase
 
 @{
-    ViewData["Title"] = "Purchase Confirmation";
+ViewData["Title"] = "Purchase Confirmation";
 }
 
 <div class="container my-5 fade-in">
@@ -24,7 +24,7 @@
             </h2>
 
             <p class="mb-4" style="color: #e6e6e6; font-size: 1.1rem;">
-                Thank you, <strong style="color:#bcd7ff;">@Model.GuestName</strong>!  
+                Thank you, <strong style="color:#bcd7ff;">@Model.GuestName</strong>!
                 Your order has been successfully placed.
             </p>
 
@@ -33,28 +33,27 @@
                 <table class="table align-middle text-center mb-0"
                        style="background-color: transparent; color: #fff; border-collapse: collapse;">
                     <thead>
-                        <tr style="color: #bcd7ff; background-color: rgba(255,255,255,0.1);">
-                            <th style="border: none;">Event</th>
-                            <th style="border: none;">Price</th>
-                            <th style="border: none;">Qty</th>
-                            <th style="border: none;">Subtotal</th>
-                        </tr>
+                    <tr style="color: #bcd7ff; background-color: rgba(255,255,255,0.1);">
+                        <th style="border: none;">Event</th>
+                        <th style="border: none;">Price</th>
+                        <th style="border: none;">Qty</th>
+                        <th style="border: none;">Subtotal</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.Items)
-                        {
-                            <tr>
-                                <td style="color:#fff;">@item.Event.Name</td>
-                                <td style="color:#bcd7ff;">
-                                    @item.Price.ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("en-CA"))
-                                </td>
-                                <td style="color:#bcd7ff;">@item.Quantity</td>
-                                <td style="color:#7fb8ff;">
-                                    @((item.Price * item.Quantity).ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("en-CA")))
-                                </td>
-                            </tr>
-
-                        }
+                    @foreach (var item in Model.Items)
+                    {
+                    <tr>
+                        <td style="color:#fff;">@item.Event.Name</td>
+                        <td style="color:#bcd7ff;">
+                            @item.Price.ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("en-CA"))
+                        </td>
+                        <td style="color:#bcd7ff;">@item.Quantity</td>
+                        <td style="color:#7fb8ff;">
+                            @((item.Price * item.Quantity).ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("en-CA")))
+                        </td>
+                    </tr>
+                    }
                     </tbody>
                 </table>
             </div>
@@ -66,10 +65,9 @@
                 <span style="color:#bcd7ff;">
                     @Model.TotalCost.ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("en-CA"))
                 </span>
-
             </h4>
 
-            <!-- Purchase Date (Local Time) -->
+            <!-- Purchase Date -->
             <p class="mt-2 mb-4" style="color:#bcd7ff; font-size: 1rem;">
                 Purchase Date:
                 <span style="color:#7fb8ff;">
@@ -77,22 +75,34 @@
                 </span>
             </p>
 
-            <!-- Back Home Button -->
-            <a asp-controller="Home" asp-action="Index"
-               class="btn fw-semibold mt-3 px-4 py-2"
-               style="background: linear-gradient(90deg, #478eff, #7fb8ff);
-                      color: #0d0d1a;
-                      border: none;
-                      border-radius: 12px;
-                      box-shadow: 0 0 15px rgba(71,142,255,0.7);
-                      transition: all 0.3s ease;">
-                Back to Home
-            </a>
+            <!-- Buttons -->
+            <div class="mt-4 d-flex justify-content-center gap-3">
+
+                <!-- Back Home -->
+                <a asp-controller="Home" asp-action="Index"
+                   class="btn fw-semibold px-4 py-2"
+                   style="background: linear-gradient(90deg, #478eff, #7fb8ff);
+                          color: #0d0d1a;
+                          border: none;
+                          border-radius: 12px;
+                          box-shadow: 0 0 15px rgba(71,142,255,0.7);
+                          transition: all 0.3s ease;">
+                    Back to Home
+                </a>
+
+                <!-- View Purchase History -->
+                <a asp-controller="Purchases" asp-action="Index"
+                   class="btn btn-outline-light px-4 py-2 fw-semibold"
+                   style="border-radius: 12px;">
+                    View Purchase History
+                </a>
+
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Confetti Animation -->
+<!-- Confetti -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <script>
     window.onload = () => {
